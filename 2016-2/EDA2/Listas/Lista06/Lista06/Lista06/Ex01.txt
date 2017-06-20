@@ -1,0 +1,7 @@
+Ex01 Cap 6 Dynamic Programming - Design Algorithm
+
+a) Imaginando uma sequencia de pesos 4 - 7 - 4, o algoritmo guloso iria escolher o nó do meio, 7, enquanto se escolhesse os dois conjuntos independentes das pontas se obteria um conjunto com peso maior.
+
+b) Dado uma sequência simples de 5 - 2 - 4 - 5, o algoritmo em questão escolheria o conjunto {5,4}, enquanto existe um conjunto de maior peso {5,5}
+
+c) Dado um conjunto independente {v1, ..., vi} e Xi sendo seu peso. Sendo X0 = 0 e X1 = w1. Para cada vi ele pertence ou não a solução Si, e assim o peso Xi = wi + Xi-2, já que se escolhido o peso anterior não pode fazer parte da solução. E não há a necessidade de se olhar para frente, uma vez que a próxima interação irá verificar a solução para trás. Dado essas informações, podemos dizer que o peso máximo para um nó será Xi = max(Xi-1, wi + Xi-2), (descarta o nó atual ou adiciona ele e calcula o peso do antepenultimo nó). Dessa forma pode-se calcular os pesos de forma crescente para que a solução final seja Xn.

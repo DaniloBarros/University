@@ -1,0 +1,27 @@
+Algorithm Design by Jon Kleinberg
+Pg 134 Cap 6 Ex 2
+
+a) Se existir uma disposição de forma que:
+
+    Semana_1 Semana_2 Semana_3
+l     10       10       1
+h     1        30       100
+
+Sendo assim, o algoritmo descrito iria selecionar, "Sem trabalho na Semana_1, Trabalho pesado na segunda e Trabalho leve na terceira", porém a solução ótima seria "Trabalho leve na primeira semana, sem trabalho na segunda e trabalho pesado na terceira", o que traria um peso de 110, ao invés de 31.
+
+b) Para a construção de um algoritmo ideal, seria necessário dois cálculos, onde poderia saber o valor se escolhido o tabalho de menor esforço ou o de maior esforço. Sendo assim seria avaliado de forma recorrente assim:
+
+MAX(L(i), H(i))
+
+, onde L(i) é o peso calculado de 1 a i, escolhendo o trabalho de menor esforço para o instante i. E H(i) sendo o peso calculado de  1 a i, escolhendo o trabalho de maior esforço para o instante i. Onde, as partes seriam calculadas de forma recursiva.
+
+Para L(i) = l_i + max(L(i-1), H(i-1)), e
+     H(i) = h_i + max(L(i-2), H(i-2))
+
+Onde L(1) = l_1 e H(1) = h_1.
+
+    Semana_1 Semana_2 Semana_3
+l     10       10       1
+h     1        30       100
+
+Agora para essa tabela seria escolhido o valor 110 para a semans 3

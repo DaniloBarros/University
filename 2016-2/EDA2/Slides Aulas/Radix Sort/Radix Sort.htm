@@ -1,0 +1,187 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+
+	<title>Radix Sort</title>
+	<meta name="Author" content="Rashid Bin Muhammad">
+
+
+
+</head>
+
+
+
+<body bodylink="blue" alink="#FF0000" background="Radix%20Sort_files/Bck2.gif" link="#0000FF" vlink="#0000FF">
+
+
+
+<center>
+<p><font size="4">|<img src="Radix%20Sort_files/redline.gif" height="2" width="640"></font></p>
+
+<h2><font size="6">Radix Sort</font></h2>
+
+<p><font size="4"><img src="Radix%20Sort_files/redline.gif" height="2" width="640"></font></p>
+</center>
+
+
+
+<p>&nbsp;</p>
+
+
+
+
+
+
+
+<p><font color="#FF0000" face="Blackadder ITC" size="6">R</font><font size="4">adix 
+sort is a small method that many people intuitively use when alphabetizing a 
+large list of names. (Here Radix is 26, 26 letters of alphabet). Specifically, 
+the list of names is first sorted according to the first letter of each names, 
+that is, the names are arranged in 26 classes. Intuitively, one might want to 
+sort numbers on their most significant digit. But Radix sort do 
+counter-intuitively by sorting on the least significant digits first. On the 
+first pass entire numbers sort on the least significant digit and combine in a 
+array. Then on the second pass, the entire numbers are sorted again on the 
+second least-significant digits and combine in a array and so on.</font></p>
+
+
+
+
+
+
+
+<p><font size="4">Following example shows how Radix sort operates on seven 3-digits number.</font></p>
+<p>&nbsp;</p>
+
+
+
+
+
+<blockquote>
+	<blockquote>
+		<blockquote>
+			<table style="border-collapse: collapse" id="AutoNumber1" border="0" bordercolor="#111111" cellpadding="0" cellspacing="0" width="40%">
+				<tbody><tr>
+					<th nowrap="nowrap" width="25%"><font size="4">INPUT</font></th>
+					<th nowrap="nowrap" width="25%"><font size="4">1<sup>st</sup> pass</font></th>
+					<th nowrap="nowrap" width="25%"><font size="4">2<sup>nd</sup> pass</font></th>
+					<th nowrap="nowrap" width="25%"><font size="4">3<sup>rd </sup>pass</font></th>
+				</tr>
+				<tr>
+					<td align="center" width="25%"><font size="4">329</font></td>
+					<td align="center" width="25%"><font size="4">720</font></td>
+					<td align="center" width="25%"><font size="4">720</font></td>
+					<td align="center" width="25%"><font size="4">329</font></td>
+				</tr>
+				<tr>
+					<td align="center" width="25%"><font size="4">457</font></td>
+					<td align="center" width="25%"><font size="4">355</font></td>
+					<td align="center" width="25%"><font size="4">329</font></td>
+					<td align="center" width="25%"><font size="4">355</font></td>
+				</tr>
+				<tr>
+					<td align="center" width="25%"><font size="4">657</font></td>
+					<td align="center" width="25%"><font size="4">436</font></td>
+					<td align="center" width="25%"><font size="4">436</font></td>
+					<td align="center" width="25%"><font size="4">436</font></td>
+				</tr>
+				<tr>
+					<td align="center" width="25%"><font size="4">839</font></td>
+					<td align="center" width="25%"><font size="4">457</font></td>
+					<td align="center" width="25%"><font size="4">839</font></td>
+					<td align="center" width="25%"><font size="4">457</font></td>
+				</tr>
+				<tr>
+					<td align="center" width="25%"><font size="4">436</font></td>
+					<td align="center" width="25%"><font size="4">657</font></td>
+					<td align="center" width="25%"><font size="4">355</font></td>
+					<td align="center" width="25%"><font size="4">657</font></td>
+				</tr>
+				<tr>
+					<td align="center" width="25%"><font size="4">720</font></td>
+					<td align="center" width="25%"><font size="4">329</font></td>
+					<td align="center" width="25%"><font size="4">457</font></td>
+					<td align="center" width="25%"><font size="4">720</font></td>
+				</tr>
+				<tr>
+					<td align="center" width="25%"><font size="4">355</font></td>
+					<td align="center" width="25%"><font size="4">839</font></td>
+					<td align="center" width="25%"><font size="4">657</font></td>
+					<td align="center" width="25%"><font size="4">839</font></td>
+				</tr>
+			</tbody></table>
+		</blockquote>
+	</blockquote>
+</blockquote>
+<p>&nbsp;</p>
+<p><font size="4">In the above example, the first column is the input. The remaining shows the 
+list after successive sorts on increasingly significant digits position. The 
+code for Radix sort assumes that each element in the </font><font size="5"> <i>n</i></font><font size="4">-element array 
+</font><font size="5">A</font><font size="4"> 
+has </font><font size="5"> <i>d</i></font><font size="4"> digits, where digit 1 is the lowest-order digit and d is the 
+highest-order digit.</font></p>
+<p>&nbsp;</p>
+<blockquote>
+	<blockquote>
+		<blockquote>
+			<p><b><font size="5"><font color="#FF00FF">RADIX_SORT</font> (A, d)</font></b></p>
+			<blockquote>
+				<p><font size="5">for<i> i</i> </font>
+				<font face="Times New Roman" size="5">&#8592; 1 to d do<br>&nbsp;&nbsp;&nbsp; use a stable sort to sort 
+				<i>A</i> on digit <i>i</i><br>&nbsp;&nbsp;&nbsp; // counting sort will do the job</font></p>
+			</blockquote>
+		</blockquote>
+	</blockquote>
+</blockquote>
+<h3>&nbsp;</h3>
+<h3>&nbsp;</h3>
+<h3><font color="#CC0000" face="Times New Roman" size="5">Analysis</font></h3>
+<p><font face="Times New Roman" size="4">The running time depends on the 
+<font color="#FF00FF">stable</font> used as 
+an intermediate sorting algorithm. When each digits is in the range 1 to </font>
+<font face="Times New Roman" size="5"> <i>k</i></font><font face="Times New Roman" size="4">, and 
+</font><font face="Times New Roman" size="5"> 
+<i>k</i></font><font face="Times New Roman" size="4"> is not too large, COUNTING_SORT&nbsp; is the obvious choice. In case of 
+counting sort, 
+each pass over </font><font face="Times New Roman" size="5"> <i>n</i></font><font face="Times New Roman" size="4"> </font>
+<font face="Times New Roman" size="5">
+<i>d</i>-digit</font><font face="Times New Roman" size="4"> numbers takes </font>
+<font face="Times New Roman" size="5">O(<i>n </i>+<i> k</i>)</font><font face="Times New Roman" size="4"> time. There are </font>
+<i><font face="Times New Roman" size="5">d</font></i><font face="Times New Roman" size="4"> passes, so the total time for 
+Radix sort is
+<img src="Radix%20Sort_files/thetaBig.gif" border="0" height="16" width="15"></font><font face="Times New Roman" size="5">(<i>n</i>+<i>k</i>)</font><font face="Times New Roman" size="4"> time. There are </font>
+<font face="Times New Roman" size="5"> <i>d</i></font><font face="Times New Roman" size="4"> passes, so the 
+total time for Radix sort is 
+<img src="Radix%20Sort_files/thetaBig.gif" border="0" height="16" width="15"></font><font face="Times New Roman" size="5">(<i>dn</i>+<i>kd</i>)</font><font face="Times New Roman" size="4">. When </font>
+<font face="Times New Roman" size="5"> <i>d</i></font><font face="Times New Roman" size="4"> is 
+constant and </font><font face="Times New Roman" size="5"> <i>k = </i></font>
+<font face="Times New Roman" size="4">
+<img src="Radix%20Sort_files/thetaBig.gif" border="0" height="16" width="15"></font><font face="Times New Roman" size="5">(<i>n</i>)</font><font face="Times New Roman" size="4">, the Radix sort runs in linear time.</font></p>
+<p>&nbsp;</p>
+<p>
+
+
+
+
+
+
+</p><center><font size="4"><img src="Radix%20Sort_files/redline.gif" height="2" width="640">
+
+</font>
+
+<p>
+
+<a href="http://www.personal.kent.edu/%7Ermuhamma/Algorithms/algorithm.html"> 
+
+<font size="4"> 
+
+<img src="Radix%20Sort_files/back.gif" border="0" height="47" width="49"></font></a></p>
+
+
+</center>
+
+
+
+
+
+
+</body></html>

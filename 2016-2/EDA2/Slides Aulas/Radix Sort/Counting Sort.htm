@@ -1,0 +1,329 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+
+	<title>Counting Sort</title>
+	<meta name="Author" content="Rashid Bin Muhammad">
+
+
+
+</head>
+
+
+
+<body bodylink="blue" alink="#FF0000" background="Counting%20Sort_files/Bck2.gif" link="#0000FF" vlink="#0000FF">
+
+
+
+<center>
+<p>
+<font size="4">
+<img src="Counting%20Sort_files/redline.gif" height="2" width="640"></font></p>
+
+<h2><font size="6">Counting Sort</font></h2>
+
+<p><font size="4"><img src="Counting%20Sort_files/redline.gif" height="2" width="640"></font></p>
+</center>
+
+
+
+<p>&nbsp;</p>
+
+
+
+<p><font color="#FF0000" face="Blackadder ITC" size="6">C</font><font size="4">ounting 
+sort assumes that each of the elements is an integer in the range 1 to </font>
+<font size="5"> <i>k</i></font><font size="4">, for some integer </font>
+<font size="5"> <i>k</i></font><font size="4">. When </font><font size="5"> <i>k</i> = O(<i>n</i>)</font><font size="4">, the 
+Counting-sort runs in </font><font size="5">O(<i>n</i>)</font><font size="4"> time. The 
+<font color="#FF00FF">basic idea </font>of Counting sort 
+is to determine, for each input elements </font><font size="5"> <i>x</i></font><font size="4">, the number of elements less 
+than </font><font size="5"> <i>x</i></font><font size="4">. This information can be used to place directly into its correct 
+position. For example, if there 17 elements less than </font><font size="5"> <i>x</i></font><font size="4">, 
+than </font><font size="5">x</font><font size="4"> belongs in output position 
+18.</font></p>
+
+
+
+<p><font size="4">In the code for Counting sort, we are given array </font>
+<font size="5"> <i>A</i>[1 . . <i>n</i>]</font><font size="4"> of 
+length </font><font size="5"> <i>n</i></font><font size="4">. We required two more arrays, the array <i>B</i>[1 . . <i>n</i>] 
+holds the sorted output and the array <i>c</i>[1 . . <i>k</i>] provides 
+temporary working storage.</font></p>
+<p>&nbsp;</p>
+
+
+
+<blockquote>
+	<blockquote>
+		<blockquote>
+			<p><b><font color="#FF00FF" size="5">COUNTING_SORT</font><font size="5"> (<i>A</i>, 
+			<i>B</i>, <i>k</i>)</font></b></p>
+			<ol>
+				<li><font size="5">for <i>i</i> <font face="Times New Roman">&#8592; 
+				</font>1 to <i>k</i> do</font></li>
+				<li><i><font size="5">&nbsp;&nbsp;&nbsp; c</font></i><font size="5">[<i>i</i>] 
+				<font face="Times New Roman">&#8592;
+  </font>0</font></li>
+				<li><font size="5">for <i>j</i> <font face="Times New Roman">&#8592; 
+				</font>1 to <i>n</i> do</font></li>
+				<li><i><font size="5">&nbsp;&nbsp;&nbsp; c</font></i><font size="5">[A[<i>j</i>]] 
+				<font face="Times New Roman">&#8592;
+  </font><i>c</i>[A[<i>j</i>]] + 1</font></li>
+				<li><font size="5">//c[<i>i</i>] now contains the number of elements equal to 
+				</font><i><font size="5">i</font></i></li>
+				<li><font size="5">for <i>i</i> <font face="Times New Roman">&#8592; 
+				</font>2 to <i>k</i> do</font></li>
+				<li><font size="5">&nbsp;&nbsp;&nbsp; c[<i>i</i>] 
+				<font face="Times New Roman">&#8592; </font>c[<i>i</i>] 
+  + c[<i>i</i>-1]</font></li>
+				<li><font size="5">// c[<i>i</i>] now contains the number of elements &#8804; 
+				</font><i><font size="5">i</font></i></li>
+				<li><font size="5">for j <font face="Times New Roman">&#8592; 
+				</font><i>n</i> downto 1 do</font></li>
+				<li><font size="5">&nbsp;&nbsp;&nbsp; B[c[A[<i>i</i>]]] 
+				<font face="Times New Roman">&#8592; </font>A[<i>j</i>]</font></li>
+				<li><font size="5">&nbsp;&nbsp;&nbsp; c[A[<i>i</i>]] 
+				<font face="Times New Roman">&#8592; </font>c[A[<i>j</i>]] - 1</font></li>
+			</ol>
+		</blockquote>
+	</blockquote>
+</blockquote>
+
+<center>
+<p align="left">&nbsp;</p>
+<p align="left"><font size="4">Each line below shows the step by step operation of counting
+    sort.</font></p>
+<p align="left">&nbsp;</p>
+    <table border="0" width="80%">
+      <tbody><tr>
+        <td width="5%"><font size="4">A</font></td>
+        <td bgcolor="#FFFF00" width="5%"><font size="4">3</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">6</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">4</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">1</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">3</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">4</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">1</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">4</font></td>
+        <td width="6%"></td>
+        <td width="6%"><font size="4">C</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">2</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">0</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">2</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">3</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">0</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">1</font></td>
+      </tr>
+    </tbody></table>
+    <p><font size="4">&nbsp;
+    </font>
+    <table border="0" width="42%">
+      <tbody><tr>
+        <td width="6%"><font size="4">&nbsp;C</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">2</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">2</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">4</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">7</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">7</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">8</font></td>
+      </tr>
+    </tbody></table>
+    </p><p><font size="4">&nbsp;
+    </font>
+    <table border="0" width="80%">
+      <tbody><tr>
+        <td width="5%"><font size="4">B</font></td>
+        <td bgcolor="#FFFF00" width="5%">&nbsp;</td>
+        <td bgcolor="#FFFF00" width="6%">&nbsp;</td>
+        <td bgcolor="#FFFF00" width="6%">&nbsp;</td>
+        <td bgcolor="#FFFF00" width="6%">&nbsp;</td>
+        <td bgcolor="#FFFF00" width="6%">&nbsp;</td>
+        <td bgcolor="#FFFF00" width="6%">&nbsp;</td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">4</font></td>
+        <td bgcolor="#FFFF00" width="6%">&nbsp;</td>
+        <td width="6%"></td>
+        <td width="6%"><font size="4">C</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">2</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">2</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">4</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">6</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">7</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">8</font></td>
+      </tr>
+    </tbody></table>
+    </p><p><font size="4">&nbsp;
+    </font>
+    <table border="0" width="80%">
+      <tbody><tr>
+        <td width="5%"><font size="4">B</font></td>
+        <td bgcolor="#FFFF00" width="5%">&nbsp;</td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">1</font></td>
+        <td bgcolor="#FFFF00" width="6%">&nbsp;</td>
+        <td bgcolor="#FFFF00" width="6%">&nbsp;</td>
+        <td bgcolor="#FFFF00" width="6%">&nbsp;</td>
+        <td bgcolor="#FFFF00" width="6%">&nbsp;</td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">4</font></td>
+        <td bgcolor="#FFFF00" width="6%">&nbsp;</td>
+        <td width="6%"></td>
+        <td width="6%"><font size="4">C</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">1</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">2</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">4</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">6</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">7</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">8</font></td>
+      </tr>
+    </tbody></table>
+    </p><p><font size="4">&nbsp;
+    </font>
+    <table border="0" width="80%">
+      <tbody><tr>
+        <td width="5%"><font size="4">B</font></td>
+        <td bgcolor="#FFFF00" width="5%">&nbsp;</td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">1</font></td>
+        <td bgcolor="#FFFF00" width="6%">&nbsp;</td>
+        <td bgcolor="#FFFF00" width="6%">&nbsp;</td>
+        <td bgcolor="#FFFF00" width="6%">&nbsp;</td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">4</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">4</font></td>
+        <td bgcolor="#FFFF00" width="6%">&nbsp;</td>
+        <td width="6%"></td>
+        <td width="6%"><font size="4">C</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">2</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">2</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">4</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">5</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">7</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">8</font></td>
+      </tr>
+    </tbody></table>
+    </p><p><font size="4">&nbsp;
+    </font>
+    <table border="0" width="54%">
+      <tbody><tr>
+        <td width="6%"><font size="4">B</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">&nbsp;1</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">1</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">&nbsp;3</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">3</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">4</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">4</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">4</font></td>
+        <td bgcolor="#FFFF00" width="6%"><font size="4">&nbsp;6</font></td>
+      </tr>
+    </tbody></table>
+</p></center>
+
+<h3>&nbsp;</h3>
+<h3>&nbsp;</h3>
+<h3><font color="#CC0000" size="5">Analysis</font></h3>
+
+
+
+<ol>
+	<li><font size="4">The loop of lines 1-2&nbsp;&nbsp; takes </font>
+	<font size="5">O(<i>k</i>)</font><font size="4"> time</font></li>
+	<li><font size="4">The loop of lines 3-4&nbsp;&nbsp; takes </font>
+	<font size="5">O(<i>n</i>)</font><font size="4"> time</font></li>
+	<li><font size="4">The loop of lines 6-7&nbsp;&nbsp; takes </font>
+	<font size="5">O(<i>k</i>)</font><font size="4"> time</font></li>
+	<li><font size="4">The loop of lines 9-11 takes </font><font size="5">O(<i>n</i>)</font><font size="4"> time</font></li>
+</ol>
+
+
+
+
+
+
+
+<p><font size="4">Therefore, the overall time of the counting sort is </font>
+<font size="5">O(<i>k</i>) + O(<i>n</i>) + O(<i>k</i>) 
++ O(<i>n</i>) = O(<i>k </i>+<i> n</i>)</font><font size="4"> </font> </p>
+
+
+
+
+
+
+
+<p>&nbsp;</p>
+<p><font size="4">In practice, we usually use counting sort algorithm when have
+</font><font size="5"> <i>k</i> = O(<i>n</i>)</font><font size="4">, 
+in which case running time is </font><font size="5">O(<i>n</i>)</font><font size="4">.</font></p>
+
+
+
+
+
+
+
+<p><font size="4">The Counting sort is a <font color="#FF00FF">stable sort</font> i.e., multiple keys with the same value 
+are placed in the sorted array in the same order that they appear in the input 
+array.</font></p>
+
+
+
+
+
+
+
+<p><font size="4">Suppose that the for-loop in line 9 of the Counting sort is rewritten:</font></p>
+<p align="center"><font size="5">9&nbsp;&nbsp;&nbsp; for <i>j</i> <font face="Times New Roman">&#8592;</font>
+  1 to <i>n</i>
+</font></p>
+<p><font size="4">then the s<font color="#FF00FF">tability no longer holds</font>. Notice that the correctness of argument 
+in the <font color="#FF00FF">CLR</font> does not depend on the order in which array
+</font><font size="5"> <i>A</i>[1 . . <i>n</i>]</font><font size="4"> 
+is processed. The algorithm is correct no matter what order is used. In 
+particular, the modified algorithm still places the elements with value<i> </i> 
+</font><i> <font size="5">k</font></i><font size="4"> 
+in position </font><font size="5"> <i>c</i>[<i>k - 1</i>] + 1</font><font size="4"> through
+</font><font size="5"> <i>c</i>[<i>k</i>]</font><font size="4">, but in 
+reverse order of their appearance in </font><font size="5"> <i>A</i>[1 . . <i>n</i>]</font><font size="4">.</font></p>
+
+
+
+
+
+
+
+<p><font size="4"><font color="#FF00FF">Note</font> that Counting sort beats the lower bound of&nbsp;
+</font><font size="5">&#937;(<i>n </i>lg<i> n</i>)</font><font size="4">, 
+because it is not a comparison sort. There is no comparison between elements. 
+Counting sort uses the actual values of the elements to index into an array.</font></p>
+
+
+
+
+
+
+
+<p>&nbsp;</p>
+
+
+
+
+
+
+
+<center><font size="4"><img src="Counting%20Sort_files/redline.gif" height="2" width="640">
+
+</font>
+
+<p>
+
+<a href="http://www.personal.kent.edu/%7Ermuhamma/Algorithms/algorithm.html"> 
+
+<font size="4"> 
+
+<img src="Counting%20Sort_files/back.gif" border="0" height="47" width="49"></font></a></p>
+
+
+</center>
+
+
+
+
+
+
+</body></html>

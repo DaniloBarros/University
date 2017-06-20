@@ -1,0 +1,29 @@
+Algorithm Design by Jon Kleinberg
+Pg 135 Cap 6 Ex 3
+
+a) Dado um grafo com 5 nós, onde a disposição é tal que:
+
+V1  ->  V2  ->  V5
+  \            /
+    V3  ->  V4
+
+Dessa forma o algoritmo iria escolher o caminho V1 -> V2 -> V5, onde este não é o caminho ideal e sim o caminho V1 -> V3 -> V4 -> V5.
+
+b) Dado um grafo direcionado podemos usar um subproblema OPT[i] para o tamanho do caminho de v1 para v_i. Porém pode não existir um caminho todo nó v_i. Sendo assim, OPT[1] = 0 e OPT[i] = -infinito, quando não se existe um caminho.
+
+Longest_path(n)
+  Array M[1...n]
+  M[1] = 0
+
+  For i = 2, ..., n
+    M = -infinity
+    For all edges (j, i) then
+       if M[j] != -infinity
+         if M < M[j] + 1 then
+           M = M[j] + 1
+         end
+       end
+    end
+    M[i] = M
+  end
+  return M[n]
