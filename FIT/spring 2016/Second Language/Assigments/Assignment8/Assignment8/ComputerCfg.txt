@@ -1,0 +1,5 @@
+img1.jpg
+sound1.mp3
+doc1.doc
+img2.jpg
+sound2.mp3

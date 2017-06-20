@@ -1,0 +1,52 @@
+3/6/2016 Arts 30
+3/7/2016 ATM 25.24
+3/8/2016 ATM Fees 150.02
+3/19/2016 Auto Insurance 250
+3/19/2016 Auto Parts 15.67
+3/19/2016 Auto Payment 25
+3/26/2016 Service 30
+3/26/2016 Books 30
+3/26/2016 Textbooks 132.18
+3/27/2016 Cash 18.75
+3/28/2016 Charity 6.67
+3/29/2016 Check 259
+3/30/2016 Clothing 20
+3/31/2016 Coffee shops 150
+4/1/2016 Doctor 34.34
+4/2/2016 Electronics 50.77
+4/3/2016 Doctor Care 30
+4/4/2016 Fast Food 50.59
+4/5/2016 Finance Charge 4.5
+4/6/2016 Gas & Fuel 63.09
+4/7/2016 Gift 64.66
+4/8/2016 Groceries 66.24
+4/9/2016 Gym 67.81
+4/10/2016 Hair 69.39
+4/11/2016 Health Insurance 70.96
+4/12/2016 Health Spa 72.54
+4/13/2016 Hobbies 74.11
+4/14/2016 Home Phone 75.68
+4/15/2016 Hotel 77.26
+4/16/2016 Internet 78.83
+4/17/2016 Late Fee 80.41
+4/18/2016 Laundry 81.98
+4/19/2016 Magazines 83.55
+4/20/2016 Mobile Phone 85.13
+4/21/2016 Movies 86.70
+4/22/2016 Music 88.28
+4/23/2016 Newspaper 89.85
+4/24/2016 Parking 91.42
+4/25/2016 Pharmacy 93.00
+4/26/2016 Rental Car 94.57
+4/27/2016 Restaurants 96.15
+4/28/2016 School Supplies 97.72
+4/29/2016 Service Fee 30
+4/30/2016 Software 18.99
+3/28/2016 Sporting Goods 45.9
+3/29/2016 Sports 23.9
+3/29/2016 Student Loan 155.77
+3/30/2016 Taxi 36
+3/30/2016 Television 34
+3/30/2016 Tuition 35000
+3/31/2016 Utilities 45
+3/31/2016 Vacation 456

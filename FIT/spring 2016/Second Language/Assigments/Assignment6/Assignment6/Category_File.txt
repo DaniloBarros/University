@@ -1,0 +1,66 @@
+1 Auto & Transport
+2 Gas & Fuel
+2 Parking
+2 Auto Service
+2 Auto Payment
+2 Auto Insurance
+2 Auto Parts
+1 Bill & Utilities
+2 Television
+2 Home Phone
+2 Utilities
+2 Internet
+2 Mobile Phone
+1 Education
+2 Textbooks
+2 Tuition
+2 Student Loan
+2 School Supplies
+1 Entertainment
+2 Arts
+2 Music
+2 Movies
+2 Newspaper
+2 Magazines
+1 Fees & Charges
+2 Service Fee
+2 Late Fee
+2 ATM Fee
+2 Finance Charge
+1 Food and Dining
+2 Groceries
+2 Coffe Shops
+2 Fast Food
+2 Restaurants
+2 Alchohol & Bars
+1 Gifs & Donation
+2 Gift
+2 Charity
+1 Health & Fitness
+2 Doctor
+2 Eyecare
+2 Pharmacy
+2 Health Insurance
+2 Gym
+2 Sports
+1 MICS
+2 Cash
+2 Check
+2 ATM
+1 Personal Care
+2 Laundry
+2 Hair
+2 Health Spa
+1 Shopping
+2 Clothing
+2 Books
+2 Eletronics
+2 Hobbies
+2 Sporting Goods
+2 Software
+1 Travel
+2 Air Travel
+2 Hotel
+2 Rental Car
+2 Vacation
+2 Taxi

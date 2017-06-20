@@ -1,0 +1,32 @@
+1. Put an extra space between the < and the iostream file name
+    fatal error: ' iostream' file not found
+    #include < iostream>
+2. Omit one of the < or > symbols in the include directive
+    expected "FILENAME" or <FILENAME>
+    #include iostream>
+3. Omit the int from int main()
+    error: C++ requires a type specifier for all declarations
+    main(int argc, const char * argv[]) {
+4. Omit or misspell the word main
+    Undefined symbols for architecture x86_64:
+    "_main", referenced from:
+    implicit entry/start for main executable
+    ld: symbol(s) not found for architecture x86_64
+    clang: error: linker command failed with exit code 1 (use -v to see invocation)
+5. Omit the open parenthesis ( from int main()
+    main.cpp:27:9: error: expected ';' after top level declarator
+    int main int argc, const char * argv[]) {
+6. Omit the closed parenthesis ) from int main()
+    main.cpp:27:41: error: expected ')'
+    int main (int argc, const char * argv[] {
+7. Omit << after the first cout
+    main.cpp:30:9: error: expected ';' after expression
+    cout  "Hello\n";
+8. Replace << with >> after the first cout
+    main.cpp:30:10: error: invalid operands to binary expression ('ostream' (aka
+    'basic_ostream<char>') and 'const char *')
+    cout >> "Hello\n";
+9. Leave off the ending curly brace }
+    main.cpp:42:1: error: expected '}'
+    main.cpp:27:42: note: to match this '{'
+    int main (int argc, const char * argv[]) {

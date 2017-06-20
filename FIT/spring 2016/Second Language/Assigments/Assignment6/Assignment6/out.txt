@@ -1,0 +1,36 @@
+Auto & Transport	$427.22
+Bill & Utilities	$346.79
+Education	$3740.23
+Entertainment	$173.19
+Fees & Charges	$30
+Food and Dining	$34
+Gifs & Donation	$83.41
+Health & Fitness	$30
+MICS	$25.24
+Personal Care	$43.98
+Shopping	$304.42
+Travel	$456
+Auto & Transport	$150.02
+Bill & Utilities	$101.36
+Education	$35184.3
+Entertainment	$6.67
+Fees & Charges	$80
+Food and Dining	$91.84
+Gifs & Donation	$25
+Health & Fitness	$60
+MICS	$4.5
+Personal Care	$0
+Shopping	$0
+Travel	$259
+Auto & Transport	$150.02
+Bill & Utilities	$101.36
+Education	$35184.3
+Entertainment	$6.67
+Fees & Charges	$80
+Food and Dining	$91.84
+Gifs & Donation	$25
+Health & Fitness	$64.5
+MICS	$0
+Personal Care	$0
+Shopping	$0
+Travel	$259

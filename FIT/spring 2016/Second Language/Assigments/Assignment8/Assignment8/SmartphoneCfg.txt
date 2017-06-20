@@ -1,0 +1,6 @@
+butter.jpg
+rock.mp3
+batman.jpg
+img1.jpg
+banana.jpg
+bird.mp3

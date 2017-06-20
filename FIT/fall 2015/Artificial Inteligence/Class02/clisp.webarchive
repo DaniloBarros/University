@@ -1,0 +1,1106 @@
+bplist00—_WebMainResource’	
+^WebResourceURL_WebResourceData_WebResourceMIMEType_WebResourceTextEncodingName_WebResourceFrameName_(http://cs.fit.edu/~pkc/classes/ai/cl.txtO[è<html><head></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">LISP (LISt Processing)
+
+Functional Programming
+Symbolic Processing
+
+Common LISP: standardized version, many dialects before
+
+-------------------------------------------------------------------------
+* unix: type clisp
+* windows: choose clisp
+  
+-------------------------------------------------------------------------
+Chapters to read in Lamkin's CL book: 3-5
+http://psg.com/~dlamkins/sl/contents.html
+
+-------------------------------------------------------------------------
+* Symbolic expressions (s-expressions)
+  - basic syntactic structures
+  - represent intructions and data  [both have the same syntax!]
+
+  - atoms (symbols or numbers)
+  - lists
+
+
+* Symbolic atoms (symbols)
+  - can contain nonalphanumeric characters: * _ + / @ $ % ^ &amp; _ &lt; &gt; ~ .
+  - can start with a digit
+  - case insensitive
+
+  *global-var*
+  123abc
+  +
+
+
+* Numeric atoms (numbers)
+
+  145
+  31.4
+
+
+* lists
+  - sequence of atoms or other lists
+
+  (1 2 3 4 5) 
+  (ai-class (john 99) (mary 95) (jane 90) (mark 85))
+  (+ 2 3 (/ 3 4))
+
+
+* special symbols
+  - nil or ()      [nil or empty list is a list as well as an atom] 
+  - t              [constant True]
+  - nil is "False" and anything other than nil is "True", including t.
+
+-------------------------------------------------------------------------
+* LISP interpreter
+
+     while not exit
+	1. read
+	2. evaluate
+	3. print (the return value)
+
+  Exit:
+        Control-D    [clisp]
+
+  It's more convenient to store a LISP program in a file and load it in
+  for interpretation.  This way you can debug and edit the file and then
+  reload.
+
+  Filename extension:
+        .lisp, e.g.  hw1.lisp
+
+  Load file:
+        (load '&lt;filename&gt;) or (load "&lt;filename&gt;")    [clisp]
+
+  Comments:
+        start with a semicolon
+
+
+* each s-expression is evaluated and returns a value
+
+  &gt; 145 
+  145
+  &gt; count
+  23                        ; if count was set to 23
+  &gt; name-list 
+  (john mary jane mark)     ; if name-list was set to ...
+
+
+* no evaulation
+  - '&lt;s-exp&gt; or (quote &lt;s-exp&gt;)
+
+  &gt; 'count
+  count
+  &gt; (quote count)
+  count
+  &gt; '(+ 3 4)
+  (+ 3 4)
+
+-------------------------------------------------------------------------
+
+Common mistake #1: evaluation vs no evaluation
+
+  count vs 'count
+  (+ 2 3) vs '(+ 2 3)
+
+-------------------------------------------------------------------------
+* s-expression as functions
+  - first symbol of the list is the function name
+  - the rest of the symbols are arugments to the function
+
+-------------------------------------------------------------------------  
+* Assignment functions (pure functional programming avoids assignments)
+  (setq count 45) 	
+  (set 'count 45)
+  (set (quote count) 45)
+
+  &gt; count
+  23
+  &gt; (setq count 45)
+  45
+  &gt; count
+  45
+
+-------------------------------------------------------------------------
+* Arithmetic functions
+
+  &gt; (+ 2 3)
+  5
+  &gt; (- 6 2 3)
+  1
+  &gt; (/ 100 5 2)
+  10
+  &gt; (* (+ 2 3) (/ 100 5 2))
+  50
+  &gt; (1+ 2)           ; just 1+, no 2+ ...
+  3
+  &gt; (/ 1 2)          ; fractions
+  1/2
+  &gt; (float (/ 1 2))
+  0.5
+  &gt; (+ 1/2 2/3)      ; fractions as arguments
+  7/6
+  &gt; (+ 1/2 2/3 .5)   
+  1.6666666
+
+-------------------------------------------------------------------------
+* List manipulating functions
+
+  &gt; (car '(a b c))
+  A
+  &gt; (first '(a b c))
+  A
+  &gt; (cdr '(a b c))
+  (B C)
+  &gt; (rest '(a b c))
+  (B C)
+
+  &gt; (second '(a b c))    ; depends on the implemenation for second, third...
+  B
+  &gt; (third '(a b c))
+  C
+  &gt; (cadr '(a b c))
+  B
+  &gt; (caddr '(a b c))
+  C
+
+  &gt; (last '(a b c))
+  (C)
+
+  &gt; (nth 0 '(a b c))
+  A
+  &gt; (nth 2 '(a b c))
+  C
+
+  &gt; (cons 'd '(a b c))   ; second argument is a list
+  (D A B C)
+  &gt; (cons '(d e) '(a b c))
+  ((D E) A B C)
+
+  &gt; (list 'd 'a 'b 'c)
+  (D A B C)
+  &gt; (list 'd '(a b) 'c)
+  (D (A B) C)
+
+  &gt; (append '(a b) '(c d))  ; arguments are lists
+  (A B C D)
+
+  &gt; (cons 'd (append '(a b) '(c d)))
+  (D A B C D)
+  &gt; (cons 'd '(append '(a b) '(c d)))
+  (D APPEND '(A B) '(C D))
+
+  &gt; (length '(a b))
+  2
+  &gt; (length '((a b) c (d)))
+  3
+
+  &gt; (reverse '(a b c))
+  (C B A)
+
+------------------------------------------------------------------------
+
+Common mistake #2: second argument to cons is not a list
+
+  (cons 'a 'b)
+
+-------------------------------------------------------------------------
+* Unless otherwised noted, all functions described here are "constructive"
+  functions.  The variables involved are not changed unless an assignment
+  is used.
+
+  &gt; (setq l '(a b c))
+  (A B C)
+  &gt; (cons 'd l)
+  (D A B C)
+  &gt; l
+  (A B C)
+  &gt; (setq l (cons 'd l))
+  (D A B C)
+  &gt; l
+  (D A B C)
+
+-------------------------------------------------------------------------
+* Predicate functions
+  &gt; (atom 'a)
+  T
+  &gt; (listp '(a b c))
+  T
+  &gt; (null '(a b c))
+  NIL
+  &gt; (atom nil)
+  T
+  &gt; (atom ())
+  T
+  &gt; (listp nil)
+  T
+  &gt; (listp ())
+  T
+  &gt; (numberp 'a)
+  NIL
+  &gt; (zerop 1)
+  NIL
+
+-------------------------------------------------------------------------
+* Using lists as sets
+
+  &gt; (member 'e '(a b c d))
+  NIL
+  &gt; (member 'c '(a b c d))
+  (C D)                   ; return the cdr that starts with the element
+  &gt; (union '(a b) '(a c))
+  (B A C)
+  &gt; (intersection '(a b c) '(a d c))
+  (C A)
+
+-------------------------------------------------------------------------
+* Relational functions
+  &gt; &lt; &gt;= &lt;= = equal
+
+  &gt; (&gt; 3 5)
+  NIL
+  &gt; (= 3 3)               ; for numbers
+  T
+  &gt; (equal 3 3)           ; for numbers and symbols
+  T
+  &gt; (equal count 3)       ; if count was set to 3
+  T
+
+-------------------------------------------------------------------------
+* Logical functions
+  and or not
+
+  &gt; (or (&gt; 5 3) (&gt; 3 5))
+  T
+  &gt; (and (&gt; 5 3) (&gt; 3 5))
+  NIL
+  &gt; (not (or (&gt; 5 3) (&gt; 3 5)))
+  NIL
+  &gt; (or 'adam nil)
+  ADAM
+
+-------------------------------------------------------------------------
+* Defining functions
+  (defun &lt;func-name&gt; ([&lt;args&gt; ...]) &lt;body-exp&gt; [&lt;body-exp&gt; ... ])
+  The value of the last &lt;body-exp&gt; is returned
+
+  &gt; (defun 10-percent-discount (price)
+       (* price .9)
+    )
+  10-PERCENT-DISCOUNT
+  &gt; (10-percent-discount 100)
+  90.0
+
+-------------------------------------------------------------------------
+* Scope of variables
+  - static/lexical scoping
+  - global if it's not local
+
+  &gt; (defun f1 ()
+      (setq x 20)
+      x)
+  f1
+  &gt; (setq x 10)
+  10
+  &gt; x
+  10
+  &gt; (f1)
+  20
+  &gt; x
+  20
+  
+  &gt; (setq x 10)
+  10
+  &gt; x
+  10
+  &gt; (defun f2 (x)
+      (setq x 20)
+      x)
+  f2
+  &gt; (f2 x)
+  20
+  &gt; x
+  10
+
+  - declaring local variables (reducing the scope)
+  - let returns the value of the last &lt;exp&gt;
+   
+    (let ([ (&lt;var&gt; [&lt;init&gt;]) ... ]
+         )
+      &lt;exp&gt;
+      [&lt;exp&gt;...]
+    )
+
+  (let ((count 1)
+        (sum)            ; sum is initialized to nil
+       )
+     ...
+  )
+
+  &gt; (defun f3 ()
+      (let ((x 0)
+           )
+         (setq x 20)
+         x
+      )
+    )
+  f3
+  &gt; (setq x 10)
+  10
+  &gt; x
+  10
+  &gt; (f3)
+  20
+  &gt; x
+  10
+  
+
+  - How about a function with a local variable calls another function
+    with a variable of the same name, but it isn't local.  Which variable
+    is referenced?
+
+  (defun f4 ()
+    (let ((x 20))
+         (f5)
+	 x
+    )
+  )
+
+  (defun f5 ()
+    (setq x 30)
+  )
+
+  &gt; (setq x 10)
+  10
+  &gt; x
+  10
+  &gt; (f4)
+  20
+  &gt; x
+  30
+
+  (defun f (x)
+    (let ((x 0))
+      (let ((x 10))
+         (print x)
+      )
+      (print x)
+    )
+    (print x)
+  )
+
+  &gt;(f 20)
+ 
+  10 
+  0 
+  20 
+  20
+
+-------------------------------------------------------------------------
+* More on let
+
+  let initailizes the local variables in "parallel."
+  let* initializes the local variables one after another (sequentially).
+  let* is more intuitive and allows variable dependency.
+
+  (let* ((var1 0)
+         (var2 (+ var1 10))    ; var2 has 10
+       )
+     ...
+  )
+
+
+  (let ((var1 0)
+        (var2 (+ var1 10))     ; error, var2 can be initialized before var1
+       )
+     ...
+  )
+
+-------------------------------------------------------------------------
+* Declaring global variables
+  
+  (defvar &lt;name&gt; &lt;value&gt;)
+
+  (defvar *num-users* 20)      ; common notation: double *'s
+
+
+-------------------------------------------------------------------------
+* Programming style 1
+
+  All global variables must be well justified and are declared at the top of
+  the program.
+
+-------------------------------------------------------------------------
+* Declaring global constants
+
+  (defconstant &lt;name&gt; &lt;value&gt;)
+
+  (defconstant *pi* 3.141592654)
+
+-------------------------------------------------------------------------
+* Condition function
+  (if &lt;cond-exp&gt; &lt;then-exp&gt; [&lt;else-exp&gt;])
+  &gt; (if (&gt; 3 5)
+        (* 3 5)    
+        (+ 3 5))
+  8
+  &gt; (if (&gt; 3 5)
+        (* 3 5))
+  nil
+
+  (unless &lt;cond-exp&gt; &lt;else-exp&gt; [&lt;else-exp&gt; ... ])
+  The value of the last &lt;else-exp&gt; is returned
+  &gt; (unless (&gt; 3 5)
+	    (+ 3 5))
+  8
+  &gt; (unless (&gt; 3 5)
+	    (+ 3 5)
+	    t)
+  t
+
+-------------------------------------------------------------------------
+* Combining if and let
+
+  - if allows only one expression in the "then" part and the "else" part
+  - use let to allow multiple expressions
+
+  (defun f4 (num count)
+    (if (&gt; count 10)
+      (let ()			  ; then part
+        (setq count (- count 2))  ; for illustration, you can do
+        (* count num)             ; (* (- count 2) num)
+      )
+      (let ()			  ; else part
+        (setq count (+ count 2))
+        (/ count num)
+      )
+    ) ; endif
+  )   
+
+-------------------------------------------------------------------------
+* More on condition functions (case function)
+
+  (cond (&lt;cond-exp&gt; &lt;exp&gt; [&lt;exp&gt;...])
+        (&lt;cond-exp&gt; &lt;exp&gt; [&lt;exp&gt;...])
+        ...
+        
+  )
+  
+  &gt;(setq temp 39)
+  39
+  &gt; (cond ((&gt; temp 90) 'Hot)
+          ((&gt; temp 70) 'Warm)
+          ((&gt; temp 50) 'Cool)
+          ((&gt; temp 32) 'Cold)
+          (t 'Freezing)
+    )
+  COLD
+
+-------------------------------------------------------------------------
+* Loops
+
+  (do ((&lt;var&gt; [&lt;init&gt; &lt;step&gt;])
+       ...
+      )
+
+      (&lt;end-exp&gt; &lt;return-exp&gt;)
+
+      &lt;body-exp&gt;
+      ...
+  )
+
+
+  (do ((i 1 (1+ i))
+       (sum 0)
+      )
+
+      ((&gt; i 10) sum)
+
+      (setq sum (+ sum i))
+  )
+
+
+  do initailizes the local variables in "parallel."
+  do* initializes the local variables one after another (sequentially).
+  do* is more intuitive and allows variable dependency.
+
+
+  (do* ((var1 0 (1+ var1))
+        (var2 (+ var1 10))     ; var2 has 10
+       )
+     ...
+  )
+
+
+* Specialized loops
+
+  (dotimes (&lt;loop-var&gt; &lt;times&gt; [&lt;result-exp&gt;])  ; &lt;var&gt; starts from zero
+    &lt;body-exp&gt;
+    ...
+  )
+
+  (let ((sum 0))
+    (dotimes (count 10 sum)
+      (setq sum (+ sum (1+ count)))
+    )
+  )
+
+
+  (dolist (&lt;loop-var&gt; &lt;list&gt; [&lt;result-exp&gt;])
+    &lt;body-exp&gt;
+    ...
+  )
+
+  (let ((count 0))
+    (dolist (sym '(a b c d e f) count)
+      (setq count (1+ count))
+    )
+  )
+
+-------------------------------------------------------------------------
+* Programming style 2
+
+  All loops should be in the form of do or its variants (do*, dotimes
+  &amp; dolist).  Other loop constructs can result in unstructured programs.
+
+-------------------------------------------------------------------------
+* Recursion
+  Three parts: 1. decomposition
+               2. base case
+               3. composition
+
+  ; factorial
+  (defun fac (x)
+    (if (&gt; x 1)
+        (* x (fac (- x 1)))
+	1
+    )
+  )
+
+  calling tree
+
+  ; fibonacci
+  (defun fib (x)
+    (if (&gt; x 1)
+        (+ (fib (- x 1)) (fib (- x 2)))
+	1
+    )
+  )
+
+  a. car-cdr recursion
+
+  &gt; (length '((A B) C (D)))
+  3
+
+  (defun count-atoms (list)
+     (cond ((null list) 0)
+           ((atom list) 1)
+           (t (+ (count-atoms (car list))
+		 (count-atoms (cdr list))))
+     )
+  )
+
+  &gt; (count-atoms '((A B) C (D)))
+  4
+ 
+
+  b. cdr recursion
+     - not recommended since it can be done easily using loops (iterations)
+
+  (defun my-length (list)
+    (cond ((null list) 0)
+          (t (+ (my-length (cdr list)) 1))
+    )
+  )
+
+  &gt; (my-length '((A B) C (D)))
+  3
+
+-------------------------------------------------------------------------
+* Property lists
+
+  A symbol can have several properties and each property has a value.
+  For example, John has an address, phone number, and age.
+
+  &gt; (setf (get 'john 'addr) 'melboune))
+  MELBOURNE
+  &gt; (setf (get 'john 'phone) '2345678))
+  2345678
+  &gt; (setf (get 'john 'age) 64)
+  64
+
+  &gt; (get 'john 'addr)
+  MELBOURNE
+  &gt; (get 'john 'phone)
+  2345678
+  &gt; (get 'john 'age)
+  64
+
+-------------------------------------------------------------------------
+* Functions as arguments [a key characteristic of functional languages]
+
+  #' signifies a function [ #'&lt;sym&gt; is the same as (function &lt;sym&gt;) ]
+
+
+  (funcall &lt;function&gt; &lt;arg&gt; &lt;arg&gt; ...)
+
+  &gt; (cons 'a '(b c))
+  (A B C)
+  &gt; (funcall #'cons 'a '(b c))
+  (A B C)
+  &gt; (funcall 'cons 'a '(b c))   ; the # is not necessary, but it serves 
+  (A B C)                       ; as a reminder that the symbol is a function
+
+
+  (apply &lt;function&gt; &lt;arg-list&gt;)
+
+  &gt; (apply #'cons '(a (b c)))
+  (A B C)
+
+  (defun ff (func)
+    (funcall func 1 2 3)
+  )
+  (defun my-func (x y z)
+    (- (+ x y) z)
+  )
+
+  &gt; (ff #'+)
+  6
+  &gt; (ff #'*)
+  6
+  &gt; (ff #'-)
+  -4
+  &gt; (ff #'/)
+  1/6
+  &gt; (ff #'my-func)
+  0
+
+-------------------------------------------------------------------------
+* Mapping functions (a way of getting rid of iterations) [Chapter 12]
+  
+  (mapcar &lt;function&gt; &lt;arg-list&gt; ...)
+
+  &gt; (mapcar #'1+ '(3 4 5))
+  (4 5 6)
+  &gt; (mapcar #'list '(a b c) '(1 2 3))
+  ((A 1) (B 2) (C 3))
+  &gt; (mapcar #'funcall '(+ -) '(2 3) '(5 4))  ; can't use #' in a list
+  (7 -1)
+
+
+  maplist is like mapcar except that maplist applies the function to the
+  successive cdr/rest of the list, not successive car/first of the list
+
+  (maplist &lt;function&gt; &lt;arg-list&gt; ...)
+
+  &gt; (maplist #'length '(a b c))
+  (3 2 1)
+  &gt; (maplist #'list '(a b c) '(1 2 3))
+  (((A B C) (1 2 3)) ((B C) (2 3)) ((C) (3)))
+
+
+  After "mapping" to get a list of values, one might want to "reduce" 
+  the list of values to a single value.
+
+  The first argument of reduce is a function that accepts 2 arguments 
+
+  &gt; (defun f1 (x y)
+       (/ (+ x y) 2)
+    )
+  F1
+  &gt; (reduce #'f1 '(1 3 5))
+  7/2
+  &gt; (reduce #'f1 (mapcar #'1+ '(0 2 4)))
+  7/2 
+
+  If the list has only one item, the item is returned.
+  If the list is nil, error.
+
+
+  Hence if you define a function with 2 arguments, 
+   using reduce allows you to work on a list of many items.
+
+  (defun f1 (x y) ...)
+
+  (reduce #'f1 some-list)
+
+
+
+  For functions with more than 2 arguments, use apply
+
+  &gt; (apply #'* '(1 3 5))
+  15
+  &gt; (apply #'* (mapcar #'1+ '(0 2 4)))
+  15
+
+  &gt; (apply #'+ (mapcar #'abs '(-1 2 3 -4)))
+  10
+
+-------------------------------------------------------------------------
+* Strings
+  encompassed by double quotes
+
+  "John"
+
+  Case sensitive comparisons:
+
+  string=          
+      returns T or NIL
+
+  string&lt; string&gt; string&lt;= string&gt;= string/=
+       returns position of the first character fails to match,
+       remember non-nil is true
+
+  &gt; (equal 'John 'john)   ; symbols, not strings, use equal, case insensitive
+  T
+  &gt; (string= "John" "John")
+  T
+  &gt; (string= "John" "john")
+  NIL
+  &gt; (string&lt; "john" "John")
+  NIL
+  &gt; (string&lt; "John" "john")
+  0
+  &gt; (string/= "John" "Jon")
+  2
+  
+
+  Case insensitive comparisons:
+  string-equal
+  string-lessp string-greaterp string-not-greaterp string-not-lessp
+  string-not-equal
+
+  &gt; (string-equal "John" "john")
+  T
+
+
+  String access:
+
+  (char &lt;string&gt; &lt;index&gt;)
+
+  &gt; (char "Melbourne" 2)
+  #\l				; #\ signifies a character
+
+  &gt; (setq city "Melbourne")
+  "Melbourne"
+  &gt; (setf (char city 0) #\F)
+  #\F
+  &gt; city
+  "Felbourne"
+
+  convert symbol to string:
+  
+  &gt; (string 'symbol)   ; to emphasize symbols and strings are different
+  "SYMBOL"
+
+
+  
+-------------------------------------------------------------------------  
+* Arrays
+  (make-array &lt;dimensions&gt; [:initial-element] [:initial-contents])
+
+  &gt; (setq array1 (make-array '(5)))
+  #(NIL NIL NIL NIL NIL)
+  &gt; (setq array2 (make-array '(5) :initial-element 0))
+  #(0 0 0 0 0)
+  &gt; (setq array3 (make-array '(2 3)))
+  #2A((NIL NIL NIL) (NIL NIL NIL))
+  &gt; (setq array4 (make-array '(2 3) :initial-contents '((a b c) (1 2 3))))
+  #2A((A B C) (1 2 3))
+
+  (aref &lt;array&gt; &lt;subscript&gt; ... )
+
+  &gt; (aref array4 0 1)
+  B
+
+  &gt; (setf (aref array4 0 1) 'x)
+  X
+  &gt; (aref array4 0 1)
+  X
+  &gt; array4
+  #2A((A X C) (1 2 3))
+
+-------------------------------------------------------------------------
+
+* Structures (similar to property lists, but fields need to be specified
+              before hand)
+
+  &gt; (defstruct student name email gpa)
+  STUDENT
+
+  &gt; (setq s1 (make-student :name 'john :email 'john@fit.edu :gpa 3.7))
+  #S(STUDENT :NAME JOHN :EMAIL JOHN@FIT.EDU :GPA 3.7)
+
+  &gt; (student-name s1)               ; access
+  JOHN
+  &gt; (setf (student-name s1) 'jack)  ; assign
+  JACK
+  &gt; s1
+  #S(STUDENT :NAME Jack :EMAIL JOHN@FIT.EDU :GPA 3.7)
+
+  &gt; (setq s2 (make-student :name 'john :email 'john@fit.edu )) ; missing a value
+  #S(STUDENT :NAME JOHN :EMAIL JOHN@FIT.EDU :GPA NIL)
+
+  &gt; (setq s3 (make-student :gpa 3 :email 'john@fit.edu )) ; different ordering
+  #S(STUDENT :NAME NIL :EMAIL JOHN@FIT.EDU :GPA 3)
+
+------------------------------------------------------------------------
+
+* Classes (OO) [Chapter 7]
+
+-------------------------------------------------------------------------
+
+* Read and write
+
+  (read)
+
+  (print &lt;object&gt;)  
+  prints a new line, &lt;object&gt;, followed by a space; returns &lt;object&gt;;
+  output is LISP readable
+  
+  &gt; (print "john")
+
+  "john"
+  "john"
+
+ 
+  &gt; (print 'john)
+
+  JOHN 
+  JOHN
+
+  &gt; (setq john 'john-smith)
+  JOHN-SMITH
+  &gt; (print john)
+ 
+  JOHN-SMITH 
+  JOHN-SMITH
+
+
+  (prin1 &lt;object&gt;)
+  prints &lt;object&gt;; output is LISP readable
+
+  &gt; (prin1 "john")
+  "john"  ; output
+  "john"  ; return value
+
+
+  (princ &lt;object&gt;)
+  prints &lt;object&gt;; returns object; output is nicer (without escape characters
+  or double quotes)
+  
+  &gt; (princ "john")
+  john    ; output
+  "john"  ; return value
+
+
+  (terpri)
+  prints a new line; returns nil
+
+
+  (format &lt;destination&gt; &lt;control-string&gt; &lt;object1&gt; ...)
+
+  &lt;destination&gt; is t, output is sent to standard output
+  &lt;control-string&gt;  Details in Chapter 24
+      ~a  like princ
+      ~d  integer
+      ~[w,d]f  floating point, where w is the width and d is the # of digits
+               after the decimal point.
+      ~%  new line
+
+  (setq float-num (/ 3.1 29.2))
+  (setq int-num (* 50 3))
+  (setq str "AI")
+
+  &gt; (format t "~a, float-num: ~6,3f, int-num: ~d, ~a~%" 
+	      john float-num int-num str)
+  JOHN-SMITH, float-num:  0.106, int-num: 150, AI
+  NIL
+
+
+  Files:
+
+  &gt; (setq in-stream (open "tmp.txt" :direction :input))
+  #&lt;INPUT BUFFERED FILE-STREAM CHARACTER #P"tmp.txt" @1&gt;
+  &gt; (read in-stream)
+  ...
+  &gt; (close in-stream)
+  T
+
+  &gt; (setq out-stream (open "my-temp-file" :direction :output))
+  #&lt;OUTPUT BUFFERED FILE-STREAM CHARACTER #P"tmp.txt"&gt;
+  &gt; (print 'abc out-stream)
+  ABC
+  &gt; (close out-stream)
+  T
+
+
+-------------------------------------------------------------------------
+
+* Cons cells and lists
+  
+  Each cons cell has two pointers and lists are represnted by cons cells
+  linked by pointers.
+
+  (a b c) is represented as:
+
+    [|]
+   /   \
+  a    [|]
+      /   \ 
+     b    [|]
+         /   \
+        c    nil
+
+  (a (b c) d) is represnted as:
+
+
+
+  The car function returns the left pointer and the cdr function returns
+  the right pointer (they used to be register names holding the pointers).
+
+  The cons function creates a cons cell and initializes the two pointers to
+  be the addresses of the two arguments.
+
+  What happens if you do (cons 'a 'b), the second argument is not a list?
+  A fairly common mistake made by first-time LISP programmers. 
+
+
+-------------------------------------------------------------------------
+
+* eq and equal [Chapter 17]
+
+  eq means same object (same address, same entity)
+
+  equal means "look the same" (values are the same, but they might be at
+  different addresses)
+
+  It is analogus to comparing pointers (eq) and values (equal) in other
+  languages.
+
+  (setq list1 '(a b c))
+  (setq list2 '(a b c))
+  (setq list3 list1)
+  
+  &gt;(equal list1 list2)
+  T
+  &gt;(equal list1 list3)
+  T
+  &gt;(eq list1 list2)
+  NIL
+  &gt;(eq list1 list3)
+  T
+
+-------------------------------------------------------------------------
+
+* copy-tree
+ 
+  make a copy of a (nested) list--a binary tree of cons cells
+
+  &gt; (setq list1 '(a (b) c d))
+  (A (B) C D)
+  &gt; (setq list2 list1)
+  (A (B) C D)
+  &gt; (eq (second list1) (second list2))
+  T
+  &gt; (setq list3 (copy-tree list1))
+  (A (B) C D)
+  &gt; (equal list1 list3)
+  T
+  &gt; (eq list1 list3)
+  NIL
+  &gt; (eq (second list1) (second list3))
+  NIL
+
+-------------------------------------------------------------------------
+* set, setq and setf
+
+  set and setq assign values to symbols.  set evaluates the first
+  argument, whereas setq does not.
+  
+  (setq x '(a b c)) is the same as (set 'x '(a b c))
+
+  setf assigns values to "places" and is the most general form of
+  set functions.
+
+  (setf &lt;place&gt; &lt;value&gt;)
+
+  &lt;place&gt; is the access (read) method of a data object.
+
+
+  In property lists:
+
+  (setf (get 'john 'addr) 'melbourne)   ; get accesses property list values
+
+  In arrays:
+
+  (setf (aref 'array1 2) 23)            ; aref accesses array elements
+
+
+  These can't be done by setq.  However, setf can do what setq does.
+
+  (setf x '(a b c))                     ; the name of variable x accesses
+                                        ; the value of variable x
+                                        ; same as (setq x '(a b c))
+
+---------------------------------------------------------------------
+* Lambda functions ("no-name" functions or temporary functions)
+
+Consider in java:
+
+Person p = new Person();
+x.method(p);
+
+x.method(new Person());     // the person object has no "name"
+
+
+  (lambda (&lt;parameters&gt;) &lt;exp&gt; ...)
+
+&gt; (defun ff (func)
+    (funcall func 1 2 3)
+  )
+
+&gt; (ff '*)
+6
+
+&gt; (ff (lambda (x y z) (* (+ x y) z))  )
+9
+
+&gt; (reduce (lambda (x y) (/ (+ x y) 2)) '(1 2 3))
+9/4
+
+&gt; (reduce (lambda (x y) (if (&gt; x y) x y)) '(1 4 10 3))
+10 
+
+-----------------------------------------------------------------------
+* generating and executing code at runtime
+
+&gt; (defun generate-code (x y)
+     (list '* x y) )
+GENERATE-CODE
+
+&gt; (generate-code 2 3)
+(* 2 3)
+
+&gt; (setq x (generate-code 2 3))
+(* 2 3)
+
+&gt; (eval x) ; evaluate an expression
+6
+
+&gt; (eval (generate-code 2 3))
+6
+
+&gt; (setq x (cons '+ (rest x)))
+(+ 2 3)
+
+&gt; (eval x)
+5
+
+
+
+(eval y) can be thought of as (apply (first y) (rest y))
+
+Can we put "code" on the property lists, arrays ... ?
+</pre></body></html>Ztext/plainUUTF-8P    ( 7 I _ } î ø\R\]\c                           \d
